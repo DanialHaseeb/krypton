@@ -20,9 +20,10 @@ pub const Σ: [char; 26] =
 
 /// Returns the index of the given symbol in the alphabet (Σ).
 ///
-/// The index of the first character in the alphabet is 0, the index of the second
-/// character is 1, and so on, with the last one being 25. Thus, the index of a
-/// character is the number of characters that come before it in the alphabet.
+/// The index of the first character in the alphabet is 0, the index of the
+/// second character is 1, and so on, with the last one being 25. Thus, the
+/// index of a character is the number of characters that come before it in the
+/// alphabet.
 pub const Γ: Map<char, usize> = phf_map!
 {
   'A' => 0,  'B' => 1,

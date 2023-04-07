@@ -1,6 +1,4 @@
-pub fn run() -> String
+pub fn run()
 {
-  let mut result = String::new();
-  result.push_str("Enigma Analyse");
-  result
+  eprintln!("Enigma analysis ran");
 }

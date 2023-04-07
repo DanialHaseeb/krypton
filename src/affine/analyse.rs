@@ -1,6 +1,4 @@
-pub fn run() -> String
+pub fn run()
 {
-  let mut result = String::new();
-  result.push_str("Affine Analyse");
-  result
+  eprintln!("Affine analysis ran");
 }

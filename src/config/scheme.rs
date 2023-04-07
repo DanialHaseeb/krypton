@@ -15,8 +15,7 @@ impl Scheme
     {
       use Scheme::*;
       let scheme = scheme.to_lowercase();
-      let scheme = scheme.as_str();
-      match scheme
+      match scheme.as_str()
       {
         "caesar" => Ok(Caesar),
         "affine" => Ok(Affine),

@@ -12,22 +12,14 @@ use key::Key;
 pub fn run<T>(mode: Mode, args: T) -> Result<(), Box<dyn Error>>
 where T: Iterator<Item = String>
 {
-  let result =
-  {
-    if mode == Mode::Analyse
-    { analyse::run() }
-    else
-    {
-      let key = Key::parse(args)?;
-      match mode
-      {
-        Mode::Encrypt => encrypt::run(key),
-        Mode::Decrypt => decrypt::run(key),
-        _ => unreachable!()
-      }
-    }
-  };
-  println!("{result}");
+  if mode == Mode::Analyse
+  { return Ok(analyse::run()); }
 
-  Ok(())
+  let key = Key::parse(args)?;
+  match mode
+  {
+    Mode::Encrypt => Ok(encrypt::run(key)),
+    Mode::Decrypt => Ok(decrypt::run(key)),
+    _ => unreachable!()
+  }
 }

@@ -1,20 +1,40 @@
 use std::error::Error;
 
+pub mod rotor;
+pub mod reflector;
+pub mod plugboard;
+
+use rotor::Rotor;
+use plugboard::Plugboard;
+use reflector::Reflector;
+
 #[derive(Debug)]
 pub struct Key
-{ pub shift: usize }
+{
+  pub rotors: [Rotor; 3],
+  pub reflector: [usize; 26],
+  pub plugboard: [usize; 26]
+}
 
 impl Key
 {
   pub fn parse<T>(mut args: T) -> Result<Key, Box<dyn Error>>
   where T: Iterator<Item = String>
   {
-    if let Some(key) = args.next()
+    let rotors =
     {
-      let shift = key.parse::<usize>()?;
-      Ok(Key{ shift })
-    }
-    else
-    { Err("No key provided. 🔑")? }
+      let rotor1 = Rotor::parse(&mut args)?;
+      let rotor2 = Rotor::parse(&mut args)?;
+      let rotor3 = Rotor::parse(&mut args)?;
+      [rotor1, rotor2, rotor3]
+    };
+
+    let reflector = Reflector::parse(&mut args)?;
+    let reflector = reflector.wiring();
+
+    let plugboard = Plugboard::parse(&mut args)?;
+    let plugboard = plugboard.wiring;
+
+    Ok(Key{ rotors, reflector, plugboard })
   }
 }

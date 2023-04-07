@@ -1,8 +1,6 @@
 use super::key::Key;
 
-pub fn run(key: Key) -> String
+pub fn run(key: Key)
 {
-  let mut result = String::new();
-  result.push_str("Enigma Decrypt");
-  result
+  eprintln!("Enigma decryption ran with key {key:?}");
 }

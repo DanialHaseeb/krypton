@@ -15,8 +15,7 @@ impl Mode
     {
       use Mode::*;
       let scheme = scheme.to_lowercase();
-      let scheme = scheme.as_str();
-      match scheme
+      match scheme.as_str()
       {
         "encrypt" => Ok(Encrypt),
         "decrypt" => Ok(Decrypt),

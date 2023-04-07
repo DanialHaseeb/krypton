@@ -1,6 +1,4 @@
-pub fn run() -> String
+pub fn run()
 {
-  let mut result = String::new();
-  result.push_str("Caesar Analyse");
-  result
+  eprintln!("Caesar analysis ran");
 }
