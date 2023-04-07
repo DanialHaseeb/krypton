@@ -13,13 +13,11 @@ where T: Iterator<Item = String>
   use key::Key;
 
   if mode == Mode::Analyse
-  { return Ok(analyse::run()); }
+  { return Ok(analyse::run()) }
 
   let key = Key::parse(args)?;
-  match mode
-  {
-    Mode::Encrypt => Ok(encrypt::run(key)),
-    Mode::Decrypt => Ok(decrypt::run(key)),
-    _ => unreachable!()
-  }
+  if mode == Mode::Encrypt
+  { Ok(encrypt::run(key)) }
+  else
+  { Ok(decrypt::run(key)) }
 }
