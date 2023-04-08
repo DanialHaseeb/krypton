@@ -37,4 +37,16 @@ impl Key
 
     Ok(Key{ rotors, reflector, plugboard })
   }
+
+  pub fn rotate_rotors(&mut self)
+  {
+    let mut step_next = true;
+    for rotor in self.rotors.iter_mut().rev()
+    {
+      if step_next
+      { step_next = rotor.rotate(); }
+      else
+      { break; }
+    }
+  }
 }

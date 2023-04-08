@@ -1,13 +1,20 @@
 use std::error::Error;
 
+use crate::Γ;
+
 pub fn parse<T>(args: &mut T) -> Result<usize, Box<dyn Error>>
 where T: Iterator<Item = String>
 {
-  if let Some(ring_setting) = args.next()
+  if let Some(position) = args.next()
   {
-    let ring_setting: isize = ring_setting.parse()?;
-    let ring_setting = (ring_setting % 26) as usize;
-    Ok(ring_setting)
+    let mut position: char = position.parse()?;
+    if position.is_ascii_alphabetic()
+    {
+      position = position.to_ascii_uppercase();
+      Ok(Γ[&position])
+    }
+    else
+    { Err("Invalid ring setting(s). 🧐")? }
   }
   else
   { Err("Missing ring setting(s). 🧐")? }

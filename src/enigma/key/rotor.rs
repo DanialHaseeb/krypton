@@ -35,4 +35,28 @@ impl Rotor
 
     Ok(Rotor{ wiring, inverse_wiring, notch, position, ring_setting })
   }
+
+  pub fn rotate(&mut self) -> bool
+  {
+    self.position = (self.position + 1) % 26;
+    self.position == self.notch
+  }
+
+  pub fn map(&self, γ: usize) -> usize
+  {
+    let shift = 26 + self.position - self.ring_setting;
+    let γ = (γ + shift) % 26;
+    let γ = self.wiring[γ];
+    let reverse_shift = 26 + self.ring_setting - self.position;
+    (γ + reverse_shift) % 26
+  }
+
+  pub fn inverse_map(&self, γ: usize) -> usize
+  {
+    let shift = 26 + self.position - self.ring_setting;
+    let γ = (γ + shift) % 26;
+    let γ = self.inverse_wiring[γ];
+    let reverse_shift = 26 + self.ring_setting - self.position;
+    (γ + reverse_shift) % 26
+  }
 }

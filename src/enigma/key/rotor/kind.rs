@@ -41,11 +41,11 @@ impl Kind
 
     match self
     {
-      I   => Γ[&'Q'],
-      II  => Γ[&'E'],
-      III => Γ[&'V'],
-      IV  => Γ[&'J'],
-      V   => Γ[&'Z'],
+      I   => Γ[&'R'],
+      II  => Γ[&'F'],
+      III => Γ[&'W'],
+      IV  => Γ[&'K'],
+      V   => Γ[&'A'],
     }
   }
 
@@ -60,7 +60,7 @@ impl Kind
       II  => "AJDKSIRUXBLHWTMCQGZNPYFVOE",
       III => "BDFHJLCPRTXVZNYEIWGAKMUSQO",
       IV  => "ESOVPZJAYQUIRHXLNFTGKDCMWB",
-      V   => "VZBRGITYUPSDNHLXAWMJQOFECK",
+      V   => "VZBRGITYUPSDNHLXAWMJQOFECK"
     };
 
     let mut output = [0; 26];
