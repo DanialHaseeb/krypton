@@ -9,9 +9,7 @@ impl Plugboard
   pub fn parse<T>(args: &mut T) -> Result<Plugboard, &'static str>
   where T: Iterator<Item = String>
   {
-    let mut wiring = [0; 26];
-    for i in 0..26
-    { wiring[i] = i; }
+    let mut plugboard = Plugboard::new();
     for _ in 0..13
     {
       if let Some(arg) = args.next()
@@ -31,17 +29,25 @@ impl Plugboard
           let a = Γ[&a];
           let b = Γ[&b];
 
-          if (wiring[a] != a) || (wiring[b] != b)
+          if (plugboard.wiring[a] != a) || (plugboard.wiring[b] != b)
           { return Err("Cannot plug twice into one socket. 🎛️"); }
 
-          wiring[a] = b;
-          wiring[b] = a;
+          plugboard.wiring[a] = b;
+          plugboard.wiring[b] = a;
         }
         else
         { return Err("Plugboard connections must be two letters. ❌"); }
       }
     }
 
-    Ok(Plugboard{ wiring })
+    Ok(plugboard)
+  }
+
+  pub fn new() -> Plugboard
+  {
+    let mut wiring = [0; 26];
+    for i in 0..26
+    { wiring[i] = i; }
+    Plugboard{ wiring }
   }
 }

@@ -1,7 +1,7 @@
 use crate::Γ;
 
 /// The type of a rotor.
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Kind
 {
   I,

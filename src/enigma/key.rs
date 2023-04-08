@@ -5,7 +5,6 @@ pub mod reflector;
 pub mod plugboard;
 
 use rotor::Rotor;
-use rotor::kind::Kind;
 use plugboard::Plugboard;
 use reflector::Reflector;
 
