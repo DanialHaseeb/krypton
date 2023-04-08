@@ -22,6 +22,9 @@ impl Plugboard
         let mut chars = arg.chars();
         if let (Some(a), Some(b)) = (chars.next(), chars.next())
         {
+          if let Some(_) = chars.next()
+          { return Err("Plugboard connections must be two letters. ❌"); }
+
           if !(a.is_ascii_alphabetic() && (b.is_ascii_alphabetic()))
           { return Err("Plugboard connections must be two letters. ❌"); }
 
