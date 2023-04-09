@@ -5,15 +5,15 @@ pub mod reflector;
 pub mod plugboard;
 
 use rotor::Rotor;
-use plugboard::Plugboard;
 use reflector::Reflector;
+use plugboard::Plugboard;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Key
 {
   pub rotors: [Rotor; 3],
-  pub reflector: [usize; 26],
-  pub plugboard: [usize; 26]
+  pub reflector: Reflector,
+  pub plugboard: Plugboard
 }
 
 impl Key
@@ -23,17 +23,15 @@ impl Key
   {
     let rotors =
     {
-      let rotor1 = Rotor::parse(&mut args)?;
-      let rotor2 = Rotor::parse(&mut args)?;
-      let rotor3 = Rotor::parse(&mut args)?;
-      [rotor1, rotor2, rotor3]
+      let left   = Rotor::parse(&mut args)?;
+      let middle = Rotor::parse(&mut args)?;
+      let right  = Rotor::parse(&mut args)?;
+      [left, middle, right]
     };
 
     let reflector = Reflector::parse(&mut args)?;
-    let reflector = reflector.wiring();
 
     let plugboard = Plugboard::parse(&mut args)?;
-    let plugboard = plugboard.wiring;
 
     Ok(Key{ rotors, reflector, plugboard })
   }

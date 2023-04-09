@@ -1,15 +1,39 @@
+use std::fmt;
+
+use crate::Σ;
 use crate::Γ;
 
-#[derive(Debug)]
+#[derive(Clone)]
 pub struct Plugboard
 { pub wiring: [usize; 26] }
+
+impl fmt::Debug for Plugboard
+{
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
+  {
+    let mut output = String::new();
+
+    for (a, b) in self.wiring.iter().enumerate()
+    {
+      if a >= *b
+      { continue; }
+
+      output.push(Σ[a]);
+      output.push('⇆');
+      output.push(Σ[*b]);
+      output.push(' ');
+    }
+
+    write!(f, "{output}")
+  }
+}
 
 impl Plugboard
 {
   pub fn parse<T>(args: &mut T) -> Result<Plugboard, &'static str>
   where T: Iterator<Item = String>
   {
-    let mut plugboard = Plugboard::new();
+    let mut plugboard = Plugboard::default();
     for _ in 0..13
     {
       if let Some(arg) = args.next()
@@ -43,7 +67,7 @@ impl Plugboard
     Ok(plugboard)
   }
 
-  pub fn new() -> Plugboard
+  pub fn default() -> Plugboard
   {
     let mut wiring = [0; 26];
     for i in 0..26

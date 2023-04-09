@@ -1,14 +1,18 @@
 use std::error::Error;
+use std::fmt;
 
 pub mod kind;
 pub mod position;
 pub mod ring_setting;
 
+use crate::Σ;
 use kind::Kind;
 
-#[derive(Debug)]
+#[derive(Clone)]
 pub struct Rotor
 {
+  /// The rotor's type
+  pub kind: Kind,
   /// The rotor's wiring
   pub wiring: [usize; 26],
   /// The rotor's inverse wiring
@@ -21,6 +25,18 @@ pub struct Rotor
   pub ring_setting: usize
 }
 
+impl fmt::Debug for Rotor
+{
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
+  {
+    let kind = self.kind;
+    let position = Σ[self.position];
+    let ring_setting = Σ[self.ring_setting];
+
+    write!(f, "{:?} {:?} {:?}", kind, position, ring_setting)
+  }
+}
+
 impl Rotor
 {
   pub fn new(kind: Kind, position: usize, ring_setting: usize) -> Rotor
@@ -29,7 +45,7 @@ impl Rotor
     let inverse_wiring = kind.inverse_wiring();
     let notch = kind.notch();
 
-    Rotor{ wiring, inverse_wiring, notch, position, ring_setting }
+    Rotor{ kind, wiring, inverse_wiring, notch, position, ring_setting }
   }
 
   pub fn parse<T>(args: &mut T) -> Result<Rotor, Box<dyn Error>>
@@ -42,7 +58,7 @@ impl Rotor
     let position = position::parse(args)?;
     let ring_setting = ring_setting::parse(args)?;
 
-    Ok(Rotor{ wiring, inverse_wiring, notch, position, ring_setting })
+    Ok(Rotor{ kind, wiring, inverse_wiring, notch, position, ring_setting })
   }
 
   pub fn rotate(&mut self) -> bool

@@ -1,22 +1,24 @@
+use std::fmt;
+
 use crate::Γ;
 
 /// The type of a rotor.
-#[derive(Debug)]
-pub enum Reflector
+#[derive(Debug, Clone)]
+pub enum Kind
 {
   A,
   B,
   C
 }
 
-impl Reflector
+impl Kind
 {
-  pub fn parse<T>(args: &mut T) -> Result<Reflector, &'static str>
+  pub fn parse<T>(args: &mut T) -> Result<Kind, &'static str>
   where T: Iterator<Item = String>
   {
     if let Some(kind) = args.next()
     {
-      use Reflector::*;
+      use Kind::*;
 
       let kind = kind.to_uppercase();
       match kind.as_str()
@@ -33,7 +35,7 @@ impl Reflector
 
   pub fn wiring(&self) -> [usize; 26]
   {
-    use Reflector::*;
+    use Kind::*;
 
     let mapping = match self
     {
@@ -48,4 +50,38 @@ impl Reflector
 
     wiring
   }
+}
+
+#[derive(Clone)]
+pub struct Reflector
+{
+  pub kind: Kind,
+  pub wiring: [usize; 26]
+}
+
+impl fmt::Debug for Reflector
+{
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
+  { write!(f, "{:?}", self.kind) }
+}
+
+impl Reflector
+{
+  pub fn parse<T>(args: &mut T) -> Result<Reflector, &'static str>
+  where T: Iterator<Item = String>
+  {
+    let kind = Kind::parse(args)?;
+    let wiring = kind.wiring();
+
+    Ok(Reflector{ kind, wiring })
+  }
+
+  pub fn new(kind: Kind) -> Reflector
+  {
+    let wiring = kind.wiring();
+    Reflector{ kind, wiring }
+  }
+
+  pub fn default() -> Reflector
+  { Self::new(Kind::A) }
 }

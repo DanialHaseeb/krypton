@@ -1,9 +1,10 @@
 use std::io;
 
+use super::key::rotor::Rotor;
 use super::key::rotor::kind::Kind::*;
-// use super::key::rotor::Rotor;
-// use super::key::reflector::Kind;
-// use super::key::plugboard::Plugboard;
+use super::key::reflector::Reflector;
+use super::key::reflector::Kind::*;
+use super::key::plugboard::Plugboard;
 use super::key::Key;
 use super::encrypt::encrypt;
 // use crate::Γ;
@@ -27,9 +28,19 @@ pub fn run()
         if (right == left) || (right == middle)
         { continue; }
 
-        let mut key =
+        let key = Key
+        {
+          rotors:
+          [
+            Rotor::new(*left, 0, 0),
+            Rotor::new(*middle, 0, 0),
+            Rotor::new(*right, 0, 0)
+          ],
+          reflector: Reflector::new(A),
+          plugboard: Plugboard::default()
+        };
 
-        let _plaintext = decrypt(&ciphertext, &key);
+        let _plaintext = decrypt(&ciphertext, key.clone());
       }
     }
   }
@@ -53,7 +64,7 @@ fn parse() -> String
   ciphertext
 }
 
-fn decrypt(ciphertext: &String, key: &mut Key) -> String
+fn decrypt(ciphertext: &String, mut key: Key) -> String
 {
   let mut plaintext = String::new();
   for σ in ciphertext.chars()
@@ -61,7 +72,7 @@ fn decrypt(ciphertext: &String, key: &mut Key) -> String
     if !(σ.is_ascii_alphabetic())
     { continue; }
 
-    plaintext.push(encrypt(σ, key));
+    plaintext.push(encrypt(σ, &mut key));
   }
 
   plaintext

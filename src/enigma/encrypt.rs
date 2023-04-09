@@ -14,7 +14,7 @@ pub fn run(mut key: Key)
   }
 }
 
-pub fn encrypt(σ: char, key: &mut Key) -> char
+pub fn encrypt(σ: char, enigma: &mut Key) -> char
 {
   if !(σ.is_ascii_alphabetic())
   { return σ; }
@@ -22,19 +22,19 @@ pub fn encrypt(σ: char, key: &mut Key) -> char
   let σ = σ.to_ascii_uppercase();
   let mut γ = Γ[&σ];
 
-  γ = key.plugboard[γ];
+  γ = enigma.plugboard.wiring[γ];
 
-  key.rotate_rotors();
+  enigma.rotate_rotors();
 
-  for rotor in key.rotors.iter().rev()
+  for rotor in enigma.rotors.iter().rev()
   { γ = rotor.map(γ); }
 
-  γ = key.reflector[γ];
+  γ = enigma.reflector.wiring[γ];
 
-  for rotor in key.rotors.iter()
+  for rotor in enigma.rotors.iter()
   { γ = rotor.inverse_map(γ); }
 
-  γ = key.plugboard[γ];
+  γ = enigma.plugboard.wiring[γ];
 
   Σ[γ]
 }
