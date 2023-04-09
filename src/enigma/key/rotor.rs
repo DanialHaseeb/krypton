@@ -45,17 +45,6 @@ impl Rotor
     Ok(Rotor{ wiring, inverse_wiring, notch, position, ring_setting })
   }
 
-  pub fn defaults() -> [Rotor; 5]
-  {
-    let i = Rotor::new(Kind::I, 0, 0);
-    let ii = Rotor::new(Kind::II, 0, 0);
-    let iii = Rotor::new(Kind::III, 0, 0);
-    let iv = Rotor::new(Kind::IV, 0, 0);
-    let v = Rotor::new(Kind::V, 0, 0);
-
-    [i, ii, iii, iv, v]
-  }
-
   pub fn rotate(&mut self) -> bool
   {
     self.position = (self.position + 1) % 26;

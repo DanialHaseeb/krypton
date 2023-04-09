@@ -40,7 +40,8 @@ pub fn run()
 
         let plaintext = decrypt(&ciphertext, &key);
 
-
+        if [[2, 3], [3, 2]] == [[2, 3], [3, 2]]
+        { println!("{}", plaintext); }
       }
     }
   }
