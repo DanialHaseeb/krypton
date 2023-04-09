@@ -1,12 +1,13 @@
 use std::io;
 
-use super::key::rotor::Rotor;
 use super::key::rotor::kind::Kind::*;
-use super::key::reflector::Reflector;
-use super::key::plugboard::Plugboard;
-use crate::Γ;
-use crate::Σ;
+// use super::key::rotor::Rotor;
+// use super::key::reflector::Kind;
+// use super::key::plugboard::Plugboard;
 use super::key::Key;
+use super::encrypt::encrypt;
+// use crate::Γ;
+// use crate::Σ;
 
 pub fn run()
 {
@@ -26,22 +27,9 @@ pub fn run()
         if (right == left) || (right == middle)
         { continue; }
 
-        let rotor1 = Rotor::new(*right, 0, 0);
-        let rotor2 = Rotor::new(*middle, 0, 0);
-        let rotor3 = Rotor::new(*left, 0, 0);
-        let rotors = [rotor1, rotor2, rotor3];
-        let reflector = Reflector::A.wiring();
-        let plugboard = Plugboard::new().wiring;
+        let mut key =
 
-        let key = Key{ rotors, reflector, plugboard };
-
-        let combo = [left, middle, right];
-        eprintln!("{:?}", combo);
-
-        let plaintext = decrypt(&ciphertext, &key);
-
-        if [[2, 3], [3, 2]] == [[2, 3], [3, 2]]
-        { println!("{}", plaintext); }
+        let _plaintext = decrypt(&ciphertext, &key);
       }
     }
   }
@@ -65,7 +53,7 @@ fn parse() -> String
   ciphertext
 }
 
-fn decrypt(ciphertext: &String, key: &Key) -> String
+fn decrypt(ciphertext: &String, key: &mut Key) -> String
 {
   let mut plaintext = String::new();
   for σ in ciphertext.chars()
@@ -73,22 +61,7 @@ fn decrypt(ciphertext: &String, key: &Key) -> String
     if !(σ.is_ascii_alphabetic())
     { continue; }
 
-    let σ = σ.to_ascii_uppercase();
-    let mut γ = Γ[&σ];
-
-    γ = key.plugboard[γ];
-
-    for rotor in key.rotors.iter().rev()
-    { γ = rotor.map(γ); }
-
-    γ = key.reflector[γ];
-
-    for rotor in key.rotors.iter()
-    { γ = rotor.inverse_map(γ); }
-
-    γ = key.plugboard[γ];
-
-    plaintext.push(Σ[γ]);
+    plaintext.push(encrypt(σ, key));
   }
 
   plaintext
