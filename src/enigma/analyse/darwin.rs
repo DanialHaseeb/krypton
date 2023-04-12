@@ -7,6 +7,7 @@ use super::*;
 
 pub fn select_rotors(ciphertext: &String, key: &mut Key)
 {
+  let mut enigma = key.clone();
   let mut best = f64::NEG_INFINITY;
   for left in [I, II, III, IV, V].iter()
   {
@@ -20,7 +21,8 @@ pub fn select_rotors(ciphertext: &String, key: &mut Key)
         if (right == left) || (right == middle)
         { continue; }
 
-        let mut enigma = key.clone();
+        eprintln!("{:?} {:?} {:?}", left, middle, right);
+
         enigma.rotors[0] = Rotor::new(*left, 0, 0);
         enigma.rotors[1] = Rotor::new(*middle, 0, 0);
         enigma.rotors[2] = Rotor::new(*right, 0, 0);
@@ -73,5 +75,49 @@ fn select_positions(ciphertext: &String, key: &mut Key) -> f64
 
 pub fn select_ring_settings(ciphertext: &String, key: &mut Key)
 {
-  unimplemented!();
+  let mut enigma = key.clone();
+
+  for rotor in 0..3
+  {
+    let mut best = f64::NEG_INFINITY;
+    for ring_setting in 0..26
+    {
+      let current_position = enigma.rotors[rotor].position;
+      let new_position = (current_position + ring_setting) % 26;
+      enigma.rotors[rotor].position = new_position;
+      enigma.rotors[rotor].ring_setting = ring_setting;
+
+      let plaintext = decrypt(ciphertext, &mut enigma);
+      let score = score(&plaintext);
+
+      if score > best
+      {
+        best = score;
+        key.rotors[rotor].ring_setting = ring_setting;
+        key.rotors[rotor].position = new_position;
+      }
+    }
+  }
+}
+
+pub fn select_plugs(ciphertext: &String, key: &mut Key)
+{
+  let mut enigma = key.clone();
+  let mut plugged = [false; 26];
+
+  for i in 1..26
+  {
+    for j in 1..26
+    {
+      if j < i
+      { continue; }
+
+      if plugged[i] || plugged[j]
+      { continue; }
+
+      enigma.plugboard[i] = j;
+      enigma.plugboard[j] = i;
+
+    }
+  }
 }

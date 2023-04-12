@@ -11,9 +11,14 @@ pub fn run()
 
   let ciphertext = parse();
   let mut key = Key::default();
+  eprintln!("Ciphertext: {}", ciphertext);
 
   darwin::select_rotors(&ciphertext, &mut key);
   darwin::select_ring_settings(&ciphertext, &mut key);
+  darwin::select_plugs(&ciphertext, &mut key);
+
+  let plaintext = decrypt(&ciphertext, &mut key);
+  println!("{}", plaintext);
 }
 
 fn parse() -> String
