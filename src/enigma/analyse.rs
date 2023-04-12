@@ -1,49 +1,19 @@
 use std::io;
 
-use super::key::rotor::Rotor;
-use super::key::rotor::kind::Kind::*;
-use super::key::reflector::Reflector;
-use super::key::reflector::Kind::*;
-use super::key::plugboard::Plugboard;
 use super::key::Key;
 use super::encrypt::encrypt;
-// use crate::Γ;
-// use crate::Σ;
+
+pub mod darwin;
 
 pub fn run()
 {
   eprintln!("Enigma analysis ran");
 
   let ciphertext = parse();
+  let mut key = Key::default();
 
-  for left in [I, II, III, IV, V].iter()
-  {
-    for middle in [I, II, III, IV, V].iter()
-    {
-      if middle == left
-      { continue; }
-
-      for right in [I, II, III, IV, V].iter()
-      {
-        if (right == left) || (right == middle)
-        { continue; }
-
-        let key = Key
-        {
-          rotors:
-          [
-            Rotor::new(*left, 0, 0),
-            Rotor::new(*middle, 0, 0),
-            Rotor::new(*right, 0, 0)
-          ],
-          reflector: Reflector::new(A),
-          plugboard: Plugboard::default()
-        };
-
-        let _plaintext = decrypt(&ciphertext, key.clone());
-      }
-    }
-  }
+  darwin::select_rotors(&ciphertext, &mut key);
+  darwin::select_ring_settings(&ciphertext, &mut key);
 }
 
 fn parse() -> String
@@ -64,7 +34,7 @@ fn parse() -> String
   ciphertext
 }
 
-fn decrypt(ciphertext: &String, mut key: Key) -> String
+fn decrypt(ciphertext: &String, key: &mut Key) -> String
 {
   let mut plaintext = String::new();
   for σ in ciphertext.chars()
@@ -72,8 +42,20 @@ fn decrypt(ciphertext: &String, mut key: Key) -> String
     if !(σ.is_ascii_alphabetic())
     { continue; }
 
-    plaintext.push(encrypt(σ, &mut key));
+    plaintext.push(encrypt(σ, key));
   }
 
   plaintext
+}
+
+fn score(plaintext: &String) -> f64
+{
+  let mut score = 0.0;
+  for σ in plaintext.chars()
+  {
+    if σ.is_ascii_alphabetic()
+    { score += 1.0; }
+  }
+
+  score
 }

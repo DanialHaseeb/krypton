@@ -36,6 +36,21 @@ impl Key
     Ok(Key{ rotors, reflector, plugboard })
   }
 
+  pub fn default() -> Key
+  {
+    Key
+    {
+      rotors:
+      [
+        Rotor::new(rotor::kind::Kind::I, 0, 0),
+        Rotor::new(rotor::kind::Kind::II, 0, 0),
+        Rotor::new(rotor::kind::Kind::III, 0, 0)
+      ],
+      reflector: Reflector::new(reflector::Kind::A),
+      plugboard: Plugboard::default()
+    }
+  }
+
   pub fn rotate_rotors(&mut self)
   {
     let mut step_next = true;

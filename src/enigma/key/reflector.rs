@@ -3,7 +3,7 @@ use std::fmt;
 use crate::Γ;
 
 /// The type of a rotor.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Copy)]
 pub enum Kind
 {
   A,
