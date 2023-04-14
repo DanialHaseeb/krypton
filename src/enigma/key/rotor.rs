@@ -8,7 +8,7 @@ pub mod ring_setting;
 use crate::Σ;
 use kind::Kind;
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct Rotor
 {
   /// The rotor's type

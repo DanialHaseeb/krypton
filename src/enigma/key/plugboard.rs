@@ -3,7 +3,7 @@ use std::fmt;
 use crate::Σ;
 use crate::Γ;
 
-#[derive(Clone)]
+#[derive(Clone, Copy)]
 pub struct Plugboard
 { pub wiring: [usize; 26] }
 
@@ -30,6 +30,24 @@ impl fmt::Debug for Plugboard
 
 impl Plugboard
 {
+  pub fn connect(&mut self, a: usize, b: usize)
+  {
+    self.wiring[a] = b;
+    self.wiring[b] = a;
+  }
+
+  pub fn disconnect(&mut self, a: usize, b: usize)
+  {
+    assert!(self.wiring[a] == b);
+    assert!(self.wiring[b] == a);
+
+    self.wiring[a] = a;
+    self.wiring[b] = b;
+  }
+
+  pub fn has_plugged(&self, a: usize) -> bool
+  { self.wiring[a] != a }
+
   pub fn parse<T>(args: &mut T) -> Result<Plugboard, &'static str>
   where T: Iterator<Item = String>
   {
@@ -47,17 +65,16 @@ impl Plugboard
           if let Some(_) = chars.next()
           { return Err("Plugboard connections must be two letters. ❌"); }
 
-          if !(a.is_ascii_alphabetic() && (b.is_ascii_alphabetic()))
+          if !(a.is_ascii_alphabetic() && b.is_ascii_alphabetic())
           { return Err("Plugboard connections must be two letters. ❌"); }
 
           let a = Γ[&a];
           let b = Γ[&b];
 
-          if (plugboard.wiring[a] != a) || (plugboard.wiring[b] != b)
+          if plugboard.has_plugged(a) || plugboard.has_plugged(b)
           { return Err("Cannot plug twice into one socket. 🎛️"); }
 
-          plugboard.wiring[a] = b;
-          plugboard.wiring[b] = a;
+          plugboard.connect(a, b);
         }
         else
         { return Err("Plugboard connections must be two letters. ❌"); }

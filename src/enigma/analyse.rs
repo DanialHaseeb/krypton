@@ -4,21 +4,22 @@ use super::key::Key;
 use super::encrypt::encrypt;
 
 pub mod darwin;
+pub mod fitness;
 
 pub fn run()
 {
-  eprintln!("Enigma analysis ran");
-
   let ciphertext = parse();
   let mut key = Key::default();
-  eprintln!("Ciphertext: {}", ciphertext);
+  eprintln!("Ciphertext:\n{}\n", ciphertext);
 
   darwin::select_rotors(&ciphertext, &mut key);
+  eprintln!("Best rotor config:\n{key:?}");
   darwin::select_ring_settings(&ciphertext, &mut key);
-  darwin::select_plugs(&ciphertext, &mut key);
+  eprintln!("Best ring settings:\n{key:?}");
+  // darwin::select_plugboard(&ciphertext, &mut key);
 
   let plaintext = decrypt(&ciphertext, &mut key);
-  println!("{}", plaintext);
+  println!("\nPlaintext:\n{}", plaintext);
 }
 
 fn parse() -> String
@@ -51,16 +52,4 @@ fn decrypt(ciphertext: &String, key: &mut Key) -> String
   }
 
   plaintext
-}
-
-fn score(plaintext: &String) -> f64
-{
-  let mut score = 0.0;
-  for σ in plaintext.chars()
-  {
-    if σ.is_ascii_alphabetic()
-    { score += 1.0; }
-  }
-
-  score
 }
