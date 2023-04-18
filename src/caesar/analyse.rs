@@ -8,7 +8,7 @@ pub mod dictionary;
 pub fn run()
 {
   let caesar = parse();
-  eprintln!("Ciphertext:\n{}", caesar)
+  eprintln!("Ciphertext:\n{}", caesar);
   let mut key = Key::default();
 
   brutus::assassinate(&caesar, &mut key);
