@@ -1,7 +1,6 @@
 use std::io;
 
-use crate::Γ;
-use crate::Σ;
+use crate::{Γ, Σ};
 use super::key::Key;
 
 pub fn run(mut key: Key)

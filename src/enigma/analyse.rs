@@ -1,7 +1,6 @@
 use std::io;
 
-use super::key::Key;
-use super::encrypt::encrypt;
+use super::{key::Key, encrypt::encrypt};
 
 pub mod darwin;
 pub mod fitness;
@@ -16,7 +15,7 @@ pub fn run()
   eprintln!("Best rotor config:\n{key:?}");
   darwin::select_ring_settings(&ciphertext, &mut key);
   eprintln!("Best ring settings:\n{key:?}");
-  // darwin::select_plugboard(&ciphertext, &mut key);
+  darwin::select_plugboard(&ciphertext, &mut key);
 
   let plaintext = decrypt(&ciphertext, &mut key);
   println!("\nPlaintext:\n{}", plaintext);
