@@ -19,14 +19,14 @@ pub fn select_rotors(ciphertext: &String, key: &mut Key)
         if (right == left) || (right == middle)
         { continue; }
 
-        eprint!("{left:?} {middle:?} {right:?}: ");
 
         enigma.rotors[0] = Rotor::new(*left, 0, 0);
         enigma.rotors[1] = Rotor::new(*middle, 0, 0);
         enigma.rotors[2] = Rotor::new(*right, 0, 0);
 
         let score = select_positions(ciphertext, &mut enigma);
-        eprint!("{score} ");
+
+        eprint!("{enigma:?}: {score} ");
 
         if score > best
         {
@@ -45,6 +45,7 @@ pub fn select_rotors(ciphertext: &String, key: &mut Key)
 fn select_positions(ciphertext: &String, key: &mut Key) -> f64
 {
   let mut best = f64::NEG_INFINITY;
+  let mut enigma = key.clone();
 
   for left in 0..26
   {
@@ -52,7 +53,6 @@ fn select_positions(ciphertext: &String, key: &mut Key) -> f64
     {
       for right in 0..26
       {
-        let mut enigma = key.clone();
         enigma.rotors[0].position = left;
         enigma.rotors[1].position = middle;
         enigma.rotors[2].position = right;
