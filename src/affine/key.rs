@@ -2,7 +2,10 @@ use std::error::Error;
 
 #[derive(Debug)]
 pub struct Key
-{ pub shift: usize }
+{
+  pub factor: usize,
+  pub shift: usize
+}
 
 impl Key
 {
@@ -11,10 +14,16 @@ impl Key
   {
     if let Some(key) = args.next()
     {
-      let shift = key.parse::<usize>()?;
-      Ok(Key{ shift })
+      let factor = key.parse::<usize>()?;
+      if let Some(key) = args.next()
+      {
+        let shift = key.parse::<usize>()?;
+        Ok(Key{ factor, shift })
+      }
+      else
+      { Err("No shift provided. 🔑")? }
     }
     else
-    { Err("No key provided. 🔑")? }
+    { Err("No factor provided. 🔑")? }
   }
 }
