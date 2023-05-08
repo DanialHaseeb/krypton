@@ -26,4 +26,7 @@ impl Key
     else
     { Err("No factor provided. 🔑")? }
   }
+
+  pub fn default() -> Key
+  { Key{ factor: 1, shift: 0 } }
 }
