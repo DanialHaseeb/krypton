@@ -3,6 +3,7 @@ use std::io;
 use crate::{Γ, Σ};
 use super::key::Key;
 
+//Run
 pub fn run(key: Key)
 {
   while let Some(Ok(line)) = io::stdin().lines().next()
@@ -13,6 +14,7 @@ pub fn run(key: Key)
   }
 }
 
+//Decrypt
 pub fn decrypt(σ: char, key: &Key) -> char
 {
   let factor = inverse(key.factor);
@@ -30,6 +32,7 @@ pub fn decrypt(σ: char, key: &Key) -> char
   Σ[γ]
 }
 
+//Inverse
 fn inverse(factor: usize) -> usize
 {
   for i in 1..Σ.len()
