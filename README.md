@@ -20,3 +20,8 @@ Techniques
 Break, Encrypt, Decrypt explanation each
 Referneces --- how Enigma got brokenn
 Input format a.k.a Commands(???)
+
+
+Program flow (I guess):
+Krypton.rs: Read command line arguments and parse into config.
+
