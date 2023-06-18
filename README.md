@@ -8,11 +8,13 @@ A Rust implementation of Enigma (and other classical cryptosystems) as well as t
 phf
 siphasher
 In krypton.rs: std::env, std::process
+In caesar.rs: std::error::Error;
 
 
 Tell about input.txt and output.txt files
 
-
+Used:
+Enums, Boxes for Errors
 
 
 Libraries
@@ -43,6 +45,14 @@ Scheme.rs:
 Scheme is an enum with values Caesar, Affine, Enigma
 has parse function which takes command line arguments and determines if the encryption/decryption/breaking algorithm we are applying is for the Affine, Caeser or Enigma scheme
 If anything other than these values or if no mode input given, we get error messages "scheme => Unknown scheme. 🤔" or "scheme => No encryption scheme provided. 🧐"
+
+Caesar.rs:
+uses std::error::Error
+Takes Mode and command line input arguments
+If the mode is analyse/break, then we use the run function of analyse struct
+else, we extract the key from the command line arguments into a key struct.
+This is a 'shift' value in the case of Caesar.
+We call encrypt struct's run function with this key argument, or decrypt struct's run function with this key argument depending on whether the mode is encrypt of decrypt.
 
 References:
 https://youtu.be/G2_Q9FoD-oQ
