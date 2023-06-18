@@ -4,7 +4,8 @@ A Rust implementation of Enigma (and other classical cryptosystems) as well as t
 <Still drafting; don't have a heart attack reading this...>
 
 📦 Crates & Libraries
-
+phf
+siphasher
 
 Libraries
 Algorithm
