@@ -25,6 +25,7 @@ Input format a.k.a Commands(???)
 Program flow (I guess):
 
 Krypton.rs:
+Uses std::env & std:: process crates.
 Read command line arguments and parse into config struct.
 
 Config.rs:
