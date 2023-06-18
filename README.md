@@ -2,6 +2,7 @@
 A Rust implementation of Enigma (and other classical cryptosystems) as well as their cryptanalyses.
 
 <Still drafting; don't have a heart attack reading this...>
+<Update: STILL drafting... this is going to take a while...>
 
 📦 Crates & Libraries
 phf
@@ -29,7 +30,9 @@ Uses std::env & std:: process crates.
 Read command line arguments and parse into config struct.
 
 Config.rs:
-Splits command line arguments into "mode" and "scheme" struc values.
+Config is a struct composed of Mode and Scheme structs.
+Has parse function which takes command line arguments and sends them to "Mode" and "Scheme" struc t parse functions.
+Returns result object of Config struct composed of result of mode and Scheme parse functions.
 
 Mode.rs:
 Mode is an enum with values Encrypt, Decrypt, Analyse
