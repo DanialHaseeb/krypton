@@ -36,9 +36,10 @@ Returns result object of Config struct composed of result of mode and Scheme par
 
 Mode.rs:
 Mode is an enum with values Encrypt, Decrypt, Analyse
-has parse function.
-Determines if we want to encrypt, decrypt or break the cipher.
+has parse function takes command line arguments and determines if we want to encrypt, decrypt or break the cipher.
 If anything other than these values or if no mode input given, we get error messages "Unknown mode of operation. 🤔" or "No mode of operation provided. 🧐"
 
-
-
+Scheme.rs:
+Scheme is an enum with values Caesar, Affine, Enigma
+has parse function which takes command line arguments and determines if the encryption/decryption/breaking algorithm we are applying is for the Affine, Caeser or Enigma scheme
+If anything other than these values or if no mode input given, we get error messages "scheme => Unknown scheme. 🤔" or "scheme => No encryption scheme provided. 🧐"
