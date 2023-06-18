@@ -23,5 +23,10 @@ Input format a.k.a Commands(???)
 
 
 Program flow (I guess):
+
+
 Krypton.rs: Read command line arguments and parse into config.
+
+
+Config.rs: Splits command line arguments into "mode" and "scheme" struc values.
 
