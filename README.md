@@ -7,6 +7,10 @@ A Rust implementation of Enigma (and other classical cryptosystems) as well as t
 phf
 siphasher
 
+
+Tell about input.txt and output.txt files
+
+
 Libraries
 Algorithm
 Techniques
