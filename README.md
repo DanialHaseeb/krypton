@@ -8,4 +8,4 @@ Algorithm
 Techniques
 Break, Encrypt, Decrypt explanation each
 Referneces --- how Enigma got brokenn
-Commands(???)
+Input format a.k.a Commands(???)
