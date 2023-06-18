@@ -43,3 +43,10 @@ Scheme.rs:
 Scheme is an enum with values Caesar, Affine, Enigma
 has parse function which takes command line arguments and determines if the encryption/decryption/breaking algorithm we are applying is for the Affine, Caeser or Enigma scheme
 If anything other than these values or if no mode input given, we get error messages "scheme => Unknown scheme. 🤔" or "scheme => No encryption scheme provided. 🧐"
+
+References:
+https://youtu.be/G2_Q9FoD-oQ
+https://youtu.be/V4V2bpZlqx8
+https://youtu.be/RzWB5jL5RX0
+https://github.com/mikepound/enigma
+https://web.archive.org/web/20060720040135/http://members.fortunecity.com/jpeschel/gillog1.htm
