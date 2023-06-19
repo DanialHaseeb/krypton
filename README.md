@@ -3,6 +3,7 @@ A Rust implementation of Enigma (and other classical cryptosystems) as well as t
 
 <Still drafting; don't have a heart attack reading this...>
 <Update: STILL drafting... this is going to take a while...>
+<Update: STILL drafting... I give up...>
 
 📦 Crates & Libraries
 std::env
