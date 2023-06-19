@@ -54,6 +54,10 @@ else, we extract the key from the command line arguments into a key struct.
 This is a 'shift' value in the case of Caesar.
 We call encrypt struct's run function with this key argument, or decrypt struct's run function with this key argument depending on whether the mode is encrypt of decrypt.
 
+
+Analyse.rs:
+Has dictionary.rs---> has contains functions which finds given word in dictionary using binary search ---> Make binary search sound big big biggg
+
 References:
 https://youtu.be/G2_Q9FoD-oQ
 https://youtu.be/V4V2bpZlqx8
