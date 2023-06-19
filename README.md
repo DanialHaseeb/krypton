@@ -4,7 +4,7 @@ Krypton is a command-line tool that provides various cryptographic operations. I
 
 ---
 
-### Table of Contents
+### Contents
 
 - [Features](#features)
 - [Usage](#usage)
