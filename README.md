@@ -70,6 +70,30 @@ Has dictionary.rs---> has `contains` functions which finds given word in diction
 
 Krypton is a command-line tool that provides various cryptographic operations. It supports different encryption schemes, including the Caesar cipher, Affine cipher, and Enigma machine.
 
+---
+
+### Table of Contents
+
+1. [Krypton Overview](#krypton-overview)
+2. [Features](#features)
+3. [Usage](#usage)
+   - [Cloning the Repository](#cloning-the-repository)
+   - [Building the Project](#building-the-project)
+   - [Running Krypton](#running-krypton)
+4. [Cryptanalysis](#cryptanalysis)
+   - [Brute Force](#brute-force)
+   - [Index of Coincidence](#index-of-coincidence)
+5. [Implementation Details](#implementation-details)
+   - [phf](#phf)
+   - [Program Flow](#program-flow)
+6. [Examples](#examples)
+   - [Encrypt using Caesar cipher](#example-encrypt-using-caesar-cipher)
+   - [Decrypt using Affine cipher](#example-decrypt-using-affine-cipher)
+   - [Cryptanalysis of Enigma](#example-cryptanalysis-of-enigma)
+7. [References](#references)
+
+---
+
 ## Features
 
 - Encryption and decryption using different encryption schemes.
