@@ -163,18 +163,43 @@ By exhaustively searching the entire key space and scoring each decryption, the 
 
 Although the brute-force method guarantees finding the correct key, it can be computationally expensive, especially for longer ciphertexts. However, for shorter texts or cases where the key space is small, it remains a practical and effective technique for breaking the Caesar and Affine ciphers.
 
+## Cryptanalysis
+
 ### Index of Coincidence
 
-In the `analyse` mode, Krypton utilizes the "Index of Coincidence" method to perform cryptanalysis and recover the plaintext. The Index of Coincidence measures the probability that two randomly selected letters from the ciphertext are the same.
+In the `analyse` mode, Krypton utilizes the _Index of Coincidence_ method to perform cryptanalysis and recover the plaintext. The Index of Coincidence measures the probability that two randomly selected letters from the ciphertext are the same. By analyzing the frequency distribution of letters in the ciphertext, we can exploit the inherent characteristics of the English language to break encryption.
 
-The steps for using the Index of Coincidence method are as follows:
+Here's a step-by-step guide on how the Enigma machine can be broken using the Index of Coincidence method:
 
-1. Generate the frequency distribution of letters in the ciphertext.
-2. Calculate the Index of Coincidence for the ciphertext.
-3. Compare the Index of Coincidence with the best one achieved so far.
-4. If the Index of Coincidence is the highest, the encryption scheme may have been broken, and the plaintext can be recovered.
+1. Gather a sufficiently large amount of encrypted ciphertext. The more ciphertext available, the better the chances of breaking the encryption.
 
-For the Affine and Caesar ciphers, these encryption schemes can be broken using a brute force method by exhaustively searching the key space. The key space consists of all possible combinations of keys, and for each key, the resulting decryption is scored using a binary search on an English dictionary. The key that produces the highest number of valid English words in the decryption is likely the correct key.
+2. Determine the probable settings of the Enigma machine used for encryption. This includes the rotor types, initial positions, ring settings, and plugboard connections.
+
+3. Generate a frequency distribution of letters in the ciphertext. Count the occurrences of each letter to identify the relative frequencies.
+
+4. Calculate the Index of Coincidence (IoC) for the ciphertext. The IoC is computed using the formula:
+
+   ```
+   IoC = Σ (ni * (ni - 1)) / (N * (N - 1))
+   ```
+
+   Where `ni` represents the frequency of the `i`-th letter, and `N` is the total number of letters in the ciphertext.
+
+   The IoC ranges from 0 to 1, where higher values indicate a higher probability of two randomly selected letters being the same. In English, the IoC is typically around 0.067.
+
+5. Compare the calculated IoC with the expected IoC for the English language. If the calculated IoC is close to the expected value, it suggests that the probable settings of the Enigma machine have been found. Otherwise, continue with the next steps.
+
+6. Modify the probable settings of the Enigma machine, such as rotor types, initial positions, ring settings, and plugboard connections. Repeat steps 3 to 5 for the new settings.
+
+7. Iterate through various settings and compute the IoC for each configuration. Keep track of the settings that yield an IoC closest to the expected value.
+
+8. Once the probable settings of the Enigma machine have been determined, apply those settings to the Enigma machine simulation.
+
+9. Decrypt the ciphertext using the simulated Enigma machine with the probable settings. The resulting plaintext is the recovered message.
+
+Breaking the Enigma machine involves an iterative process of adjusting the settings and computing the IoC. By narrowing down the settings that yield an IoC close to the expected value, the Enigma machine can be effectively cryptanalyzed.
+
+It's important to note that the success of breaking the Enigma machine heavily relies on having a sufficient amount of ciphertext and knowledge of the encryption settings. Additionally, brute-force methods, such as trying all possible combinations of settings, can be computationally expensive for larger key spaces. However, the Index of Coincidence method provides a powerful technique to analyze the frequency patterns in the ciphertext and aid in the decryption of the Enigma machine.
 
 ## Examples
 
