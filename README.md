@@ -5,10 +5,12 @@ A Rust implementation of Enigma (and other classical cryptosystems) as well as t
 <Update: STILL drafting... this is going to take a while...>
 
 📦 Crates & Libraries
+std::env
+use std::io
+std::process
+std::error::Error
 phf
 siphasher
-In krypton.rs: std::env, std::process
-In caesar.rs: std::error::Error;
 
 
 Tell about input.txt and output.txt files
