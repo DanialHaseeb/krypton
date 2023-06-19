@@ -18,9 +18,12 @@ Tell about input.txt and output.txt files
 
 
 Overview:
+This project focuses on Caesar, Affine and Enigma cryptography techniques. For each of these, it provides users the option for encrypting a plain text into cipher text using one of these techniques and a 'key' value, decrypting cipher text into plain text given a similar 'key', or analyzing a given cipher text and finding a key to extract the plain text a.k.a 'break' the cipher.
+
+
 
 Used:
-Enums, Box, Option
+Enums, Box, Option, HashMap, Map, Traits, Iterators
 
 Libraries
 Algorithm
