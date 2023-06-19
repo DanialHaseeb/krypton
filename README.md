@@ -242,3 +242,9 @@ This project was inspired by the fascinating history of cryptography, particular
 - [Caesar cipher - Wikipedia](https://en.wikipedia.org/wiki/Caesar_cipher)
 
 These resources provided valuable insights into the various encryption schemes and techniques used in this project.
+
+#### Other Implementation Details
+
+##### `phf`
+
+In Krypton, we leverage the power of the `phf` crate, a compile-time hash table generator for Rust, to facilitate efficient translation from letters to numbers. By creating a hash map at compile time, we can eliminate runtime overhead and ensure fast lookups during the cryptographic operations. The `phf` crate allows us to define a perfect hash function, enabling us to generate a minimal perfect hash table that maps each letter to its corresponding numerical representation. This approach not only improves the performance of our encryption and decryption algorithms but also enhances the overall user experience by providing seamless and quick translations between letters and numbers.
