@@ -15,9 +15,12 @@ siphasher
 
 Tell about input.txt and output.txt files
 
-Used:
-Enums, Boxes for Errors
 
+
+Overview:
+
+Used:
+Enums, Box, Option
 
 Libraries
 Algorithm
