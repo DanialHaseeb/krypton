@@ -1,71 +1,3 @@
-# krypton
-A Rust implementation of Enigma (and other classical cryptosystems) as well as their cryptanalyses.
-
-<Still drafting; don't have a heart attack reading this...>
-<Update: STILL drafting... this is going to take a while...>
-<Update: STILL drafting... I give up...>
-
-📦 Crates & Libraries
-std::env
-use std::io
-std::process
-std::error::Error
-phf
-siphasher
-
-
-Tell about input.txt and output.txt files
-
-
-Overview:
-This project focuses on Caesar, Affine and Enigma cryptography techniques. For each of these, it provides the options of encrypting a plain text into cipher text using one of these techniques and a 'key' value, decrypting cipher text into plain text given a similar 'key', or analyzing a given cipher text and finding a key to extract the plain text a.k.a 'break' the cipher. The project also includes implementations of different techniques of 'scoring' valid words obtained from deciphering the text including binary search, hashing and index-of-coincidence approaches.
-
-
-
-Used:
-Enums, Box, Option, HashMap, Map, Traits, Iterators
-
-Libraries
-Algorithm
-Techniques
-Break, Encrypt, Decrypt explanation each
-Referneces --- how Enigma got brokenn
-Input format a.k.a Commands(???)
-
-
-Program flow (I guess):
-
-Krypton.rs:
-Uses std::env & std:: process crates.
-Read command line arguments and parse into config struct.
-
-Config.rs:
-Config is a struct composed of Mode and Scheme structs.
-Has parse function which takes command line arguments and sends them to "Mode" and "Scheme" struc t parse functions.
-Returns result object of Config struct composed of result of mode and Scheme parse functions.
-
-Mode.rs:
-Mode is an enum with values Encrypt, Decrypt, Analyse
-has parse function takes command line arguments and determines if we want to encrypt, decrypt or break the cipher.
-If anything other than these values or if no mode input given, we get error messages "Unknown mode of operation. 🤔" or "No mode of operation provided. 🧐"
-
-Scheme.rs:
-Scheme is an enum with values Caesar, Affine, Enigma
-has parse function which takes command line arguments and determines if the encryption/decryption/breaking algorithm we are applying is for the Affine, Caeser or Enigma scheme
-If anything other than these values or if no mode input given, we get error messages "scheme => Unknown scheme. 🤔" or "scheme => No encryption scheme provided. 🧐"
-
-Caesar.rs:
-uses std::error::Error
-Takes Mode and command line input arguments
-If the mode is analyse/break, then we use the run function of analyse struct
-else, we extract the key from the command line arguments into a key struct.
-This is a 'shift' value in the case of Caesar.
-We call encrypt struct's run function with this key argument, or decrypt struct's run function with this key argument depending on whether the mode is encrypt of decrypt.
-
-
-Analyse.rs:
-Has dictionary.rs---> has `contains` functions which finds given word in dictionary using binary search ---> Make binary search sound big big biggg
-
 # Krypton
 
 Krypton is a command-line tool that provides various cryptographic operations. It supports different encryption schemes, including the Caesar cipher, Affine cipher, and Enigma machine.
@@ -138,11 +70,11 @@ Krypton is a command-line tool that provides various cryptographic operations. I
 
 ### Caesar Cipher Key Format
 
-When using the Caesar cipher, the key should be an integer representing the shift value. For example, a key of 3 indicates a shift of 3 positions.
+When using the Caesar cipher, the key should be an integer representing the shift value. For example, a key of 3 indicates a shift of 3 positions. Note that only 26 unique shift values exist (0-25), however we've engineered our program in a way that it accepts any number and maps it to one of these values using the mod 26 function.
 
 ### Affine Cipher Key Format
 
-When using the Affine cipher, the key should consist of two integers separated by a space. The first integer represents the factor, and the second integer represents the shift value.
+When using the Affine cipher, the key should consist of two integers separated by a space. The first integer represents the factor, and the second integer represents the shift value. Similar to Caesar cipher, the factor and shift values too can have only 26 unique values (0-25) each too and use the mod 26 function again to map inputs to them.
 
 ### Enigma Machine Key Format
 
