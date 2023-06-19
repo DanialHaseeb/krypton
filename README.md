@@ -236,7 +236,7 @@ This project was inspired by the fascinating history of cryptography, particular
 - [Flaw in Enigma](https://youtu.be/V4V2bpZlqx8)
 - [Cracking Enigma in 2021](https://youtu.be/RzWB5jL5RX0)
 - [Mike Pound's Enigma machine implementation](https://github.com/mikepound/enigma)
-- [Cryptanalysis of the Enigma](https://web.archive.org/web/20060720040135/http://members.fortunecity.com/jpeschel/gillog1.htm)
+- [Cryptanalysis of Enigma](https://web.archive.org/web/20060720040135/http://members.fortunecity.com/jpeschel/gillog1.htm)
 - [Affine Cipher - Interactive Maths](https://crypto.interactive-maths.com/affine-cipher.html)
 - [Affine Cipher - Arizona State University](https://math.asu.edu/sites/default/files/affine.pdf)
 - [Caesar cipher - Wikipedia](https://en.wikipedia.org/wiki/Caesar_cipher)
