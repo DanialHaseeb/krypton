@@ -201,6 +201,28 @@ Breaking the Enigma machine involves an iterative process of adjusting the setti
 
 It's important to note that the success of breaking the Enigma machine heavily relies on having a sufficient amount of ciphertext and knowledge of the encryption settings. Additionally, brute-force methods, such as trying all possible combinations of settings, can be computationally expensive for larger key spaces. However, the Index of Coincidence method provides a powerful technique to analyze the frequency patterns in the ciphertext and aid in the decryption of the Enigma machine.
 
+### Other Implementation Details
+
+#### `phf`
+
+We leverage the power of the [`phf` crate](https://crates.io/crates/phf), a compile-time hash table generator for Rust, to facilitate efficient translation from letters to numbers. By creating a hash map at compile time, we can eliminate runtime overhead and ensure fast lookups during the cryptographic operations. The `phf` crate allows us to define a perfect hash function, enabling us to generate a minimal perfect hash table that maps each letter to its corresponding numerical representation. This approach not only improves the performance of our encryption and decryption algorithms but also enhances the overall coding experience by providing seamless and quick translations between letters and numbers.
+
+#### Programme Flow
+
+The Krypton application follows a structured program flow to handle different encryption schemes and modes of operation. Here's an overview of how it works:
+
+1. **krypton.rs**: The main entry point of the application, it utilizes the `std::env` and `std::process` crates to read command-line arguments and interact with the operating system. It parses the command-line arguments and passes them to the `Config` struct for further processing.
+
+2. **config.rs**: The `Config` struct represents the configuration of the encryption operation. It consists of `Mode` and `Scheme` structs. The `parse` function in `Config` takes the command-line arguments and delegates the parsing to the corresponding `parse` functions in the `Mode` and `Scheme` structs. It returns a `Result` object containing the parsed configuration.
+
+3. **mode.rs**: The `Mode` enum represents the mode of operation for the encryption. It can have three values: `Encrypt`, `Decrypt`, or `Analyse`. The `parse` function in `Mode` takes the command-line arguments and determines whether the application should perform encryption, decryption, or cryptanalysis based on the provided mode. If the mode is not recognized or no mode is provided, it displays an error message indicating an unknown or missing mode of operation.
+
+4. **scheme.rs**: The `Scheme` enum represents the encryption scheme to be used, including `Caesar`, `Affine`, and `Enigma`. The `parse` function in `Scheme` takes the command-line arguments and determines the encryption scheme based on the provided input. If the scheme is not recognized or no scheme is provided, it displays an error message indicating an unknown or missing encryption scheme.
+
+5. **caesar / affine / enigma.rs**: This module handles the encryption and decryption operations for the respective cipher. It uses the `std::error::Error` trait for error handling. If the mode is set to `Analyse`, it invokes the `run` function of the `Analyse` struct to perform cryptanalysis. Otherwise, it extracts the key from the command-line arguments and creates a `Key` struct, representing the shift value for the cipher. Depending on the mode, it calls the `run` function of either the `Encrypt` or `Decrypt` struct with the key argument.
+
+The program flow described above provides a high-level understanding of how the Krypton application processes command-line arguments, determines the mode and encryption scheme, and executes the appropriate encryption, decryption, or cryptanalysis operations. It ensures that the application functions correctly based on the user's input, handling errors and providing helpful messages when needed.
+
 ## Examples
 
 ### Example: Encrypt using Caesar cipher
@@ -242,9 +264,3 @@ This project was inspired by the fascinating history of cryptography, particular
 - [Caesar cipher - Wikipedia](https://en.wikipedia.org/wiki/Caesar_cipher)
 
 These resources provided valuable insights into the various encryption schemes and techniques used in this project.
-
-#### Other Implementation Details
-
-##### `phf`
-
-In Krypton, we leverage the power of the `phf` crate, a compile-time hash table generator for Rust, to facilitate efficient translation from letters to numbers. By creating a hash map at compile time, we can eliminate runtime overhead and ensure fast lookups during the cryptographic operations. The `phf` crate allows us to define a perfect hash function, enabling us to generate a minimal perfect hash table that maps each letter to its corresponding numerical representation. This approach not only improves the performance of our encryption and decryption algorithms but also enhances the overall user experience by providing seamless and quick translations between letters and numbers.
