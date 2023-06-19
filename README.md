@@ -67,14 +67,17 @@ We call encrypt struct's run function with this key argument, or decrypt struct'
 Analyse.rs:
 Has dictionary.rs---> has contains functions which finds given word in dictionary using binary search ---> Make binary search sound big big biggg
 
-References:
-https://youtu.be/G2_Q9FoD-oQ
-https://youtu.be/V4V2bpZlqx8
-https://youtu.be/RzWB5jL5RX0
-https://github.com/mikepound/enigma
-https://web.archive.org/web/20060720040135/http://members.fortunecity.com/jpeschel/gillog1.htm
+### References:
 
-Here's the updated README with the details from `src/enigma/key/rotor.rs`:
+https://youtu.be/G2_Q9FoD-oQ
+
+https://youtu.be/V4V2bpZlqx8
+
+https://youtu.be/RzWB5jL5RX0
+
+https://github.com/mikepound/enigma
+
+https://web.archive.org/web/20060720040135/http://members.fortunecity.com/jpeschel/gillog1.htm
 
 ## Usage
 
