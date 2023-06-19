@@ -67,7 +67,7 @@ We call encrypt struct's run function with this key argument, or decrypt struct'
 Analyse.rs:
 Has dictionary.rs---> has contains functions which finds given word in dictionary using binary search ---> Make binary search sound big big biggg
 
-### References:
+References:
 
 https://youtu.be/G2_Q9FoD-oQ
 
@@ -78,6 +78,12 @@ https://youtu.be/RzWB5jL5RX0
 https://github.com/mikepound/enigma
 
 https://web.archive.org/web/20060720040135/http://members.fortunecity.com/jpeschel/gillog1.htm
+
+https://crypto.interactive-maths.com/affine-cipher.html
+
+https://math.asu.edu/sites/default/files/affine.pdf
+
+https://en.wikipedia.org/wiki/Caesar_cipher
 
 ## Usage
 
