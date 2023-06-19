@@ -89,7 +89,7 @@ When using the Enigma machine, the key should be provided in a specific format r
 Here's an example of how to run the Enigma machine with a specific key configuration:
 
 ```shell
-./krypton -- encrypt enigma I A B II C D III E F A AB CD -- < input.txt
+./krypton encrypt enigma I A B II C D III E F A AB CD -- < input.txt
 ```
 
 *Note: Each encryption scheme may have specific key requirements and usage instructions. Make sure to provide the correct key format according to the selected encryption scheme.*
